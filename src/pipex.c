@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:27:53 by thomarna          #+#    #+#             */
-/*   Updated: 2024/12/05 14:09:58 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/12/05 20:26:12 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*get_path(char **ep, char *cmd)
 	return (0);
 }
 
-void	execmd(char **ep, char *av)
+int	execmd(char **ep, char *av)
 {
 	char	**cmds;
 	char	*path;
@@ -66,26 +66,31 @@ void	execmd(char **ep, char *av)
 	if (path == NULL)
 	{
 		free_split(cmds);
-		err0r();
+		return (1);
 	}
 	execve(path, cmds, ep);
 	free(path);
 	free_split(cmds);
+	return (1);
 }
 
-void	parent(int *fd, char **av, char **ep)
+void	parent(int *fd, char **av, char **ep, pid_t pid)
 {
 	int	fdout;
 
 	close(fd[1]);
 	fdout = open(av[4], O_CREAT | O_RDWR | O_TRUNC, 0644);
 	if (fdout < 0)
+	{
+		close(fd[0]);
 		err0r();
+	}
 	dup2(fd[0], 0);
 	dup2(fdout, 1);
 	close(fd[0]);
 	close(fdout);
 	execmd(ep, av[3]);
+	waitpid(pid, NULL, 0);
 }
 
 void	child(int *fd, char **av, char **ep)
@@ -95,7 +100,10 @@ void	child(int *fd, char **av, char **ep)
 	close(fd[0]);
 	fdin = open(av[1], O_RDONLY);
 	if (fdin < 0)
+	{
+		close(fd[1]);
 		err0r();
+	}
 	dup2(fd[1], 1);
 	dup2(fdin, 0);
 	close(fd[1]);
@@ -118,9 +126,8 @@ int	main(int ac, char **av, char **ep)
 	pid = fork();
 	if (pid < 0)
 		err0r();
-	if (pid)
+	if (pid == 0)
 		child(fd, av, ep);
 	waitpid(pid, NULL, 0);
-	parent(fd, av, ep);
-	return (EXIT_SUCCESS);
+	parent(fd, av, ep, pid);
 }
