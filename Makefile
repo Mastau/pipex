@@ -6,6 +6,7 @@ DIROBJS = .objs
 OBJS = $(SRCS:%.c=$(DIROBJS)/%.o)
 HEADER = -I lib/libft -I includes/
 SRCS = src/pipex.c \
+	   src/utils.c \
 
 all: $(NAME)
 
