@@ -6,13 +6,13 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:03:46 by thomarna          #+#    #+#             */
-/*   Updated: 2024/12/09 19:05:43 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:20:26 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	err0r(char *cmd)
+int	err0r(char *cmd)
 {
 	char	**str;
 
@@ -32,7 +32,7 @@ void	err0r(char *cmd)
 			ft_dprintf(2, "pipex: %s\n", strerror(errno));
 	}
 	free_split(str);
-	exit(EXIT_FAILURE);
+	return (1);
 }
 
 char	*get_path(char **ep, char *cmd)

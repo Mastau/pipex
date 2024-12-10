@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:27:11 by thomarna          #+#    #+#             */
-/*   Updated: 2024/12/09 19:06:04 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:20:40 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
-void	err0r(char *cmd);
+int		err0r(char *cmd);
 char	*get_path(char **ep, char *cmd);
 int		execmd(char **ep, char *av);
 

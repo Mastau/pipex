@@ -6,13 +6,13 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:27:53 by thomarna          #+#    #+#             */
-/*   Updated: 2024/12/09 19:05:40 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/12/10 11:24:02 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	parent(int *fd, char **av, char **ep, pid_t pid)
+int	parent(int *fd, char **av, char **ep, pid_t pid)
 {
 	int	fdout;
 
@@ -28,11 +28,12 @@ void	parent(int *fd, char **av, char **ep, pid_t pid)
 	close(fd[0]);
 	close(fdout);
 	if (execmd(ep, av[3]))
-		err0r(av[3]);
+		return (err0r(av[3]));
 	waitpid(pid, NULL, 0);
+	return (1);
 }
 
-void	child(int *fd, char **av, char **ep)
+int	child(int *fd, char **av, char **ep)
 {
 	int	fdin;
 
@@ -48,14 +49,17 @@ void	child(int *fd, char **av, char **ep)
 	close(fd[1]);
 	close(fdin);
 	if (execmd(ep, av[2]))
-		err0r(av[2]);
+		return (err0r(av[2]));
+	return (0);
 }
 
 int	main(int ac, char **av, char **ep)
 {
 	int		fd[2];
 	pid_t	pid;
+	int		ret;
 
+	ret = 0;
 	if (ac != 5)
 	{
 		ft_dprintf(2, "Usage: %s infile cmd1 cmd2 outfile\n", av[0]);
@@ -67,7 +71,9 @@ int	main(int ac, char **av, char **ep)
 	if (pid < 0)
 		err0r("");
 	if (pid == 0)
-		child(fd, av, ep);
+		ret = child(fd, av, ep);
 	else
-		parent(fd, av, ep, pid);
+		ret = parent(fd, av, ep, pid);
+	waitpid(pid, NULL, 0);
+	return (ret);
 }
