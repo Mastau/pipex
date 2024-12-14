@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:27:53 by thomarna          #+#    #+#             */
-/*   Updated: 2024/12/14 17:26:54 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:32:45 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,3 @@ int	main(int ac, char **av, char **ep)
 	waitpid(pid2, NULL, 0);
 	return (0);
 }
-
