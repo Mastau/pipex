@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:27:53 by thomarna          #+#    #+#             */
-/*   Updated: 2024/12/13 15:18:35 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:26:54 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,26 +78,3 @@ int	main(int ac, char **av, char **ep)
 	return (0);
 }
 
-/* int pipex(char **cmd, char **env) { */
-/* 	int pid1; */
-/* 	int pid2; */
-/*  */
-/* 	pid1 = fork(); */
-/* 	if (!pid1) { */
-/*  */
-/* 	} */
-/* 	else { */
-/* 		pid2 = fork(); */
-/* 		if (!pid2) { */
-/*  */
-/* 		} */
-/* 		else { */
-/*  */
-/* 		} */
-/* 		waitpid(-1, NULL, WUNTRACED); */
-/* 				*/
-/*  */
-/*  */
-/* 	} */
-/*  */
-/* } */

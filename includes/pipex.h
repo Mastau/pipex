@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 11:27:11 by thomarna          #+#    #+#             */
-/*   Updated: 2024/12/10 11:20:40 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/12/14 17:28:02 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@
 int		err0r(char *cmd);
 char	*get_path(char **ep, char *cmd);
 int		execmd(char **ep, char *av);
-
+int		child1(int *fd, char **av, char **ep);
+int		child2(int *fd, char **av, char **ep);
 #endif
